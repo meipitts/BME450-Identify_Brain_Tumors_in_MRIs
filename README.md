@@ -1,4 +1,4 @@
-# BME450-Identifying_Brain_Tumors_in_MRIs
+# BME450-Identify_Brain_Tumors_in_MRIs
     "Identifying Different Types of Tumors in Brain MRIs"
 ## Team Members
     Mei Pitts (meipitts), Nathan Petrucci (npetrucci)
