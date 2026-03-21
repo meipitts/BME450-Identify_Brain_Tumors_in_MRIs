@@ -4,7 +4,7 @@
     Mei Pitts (meipitts), Nathan Petrucci (npetrucci)
 ## Project Description
     The main goal of this project will be processing a large dataset of MRI images already labeled as either being normal or containing a specific kind of brain tumor.
-    The resulting trained neural net will be capable of determining if an inputted MRI image is that of a patient with a glioma, menigioma, pituitary tumor or no tumor.
+    The resulting trained neural net will be capable of determining if an inputted MRI image is that of a patient with a glioma, meningioma, pituitary tumor or no tumor.
     The relative strength of the output (how close the each 'tumor' neuron output is to 1 compared to how close the 'normal' neuron is to 1 will also serve as a measure for of the model's confidence in its prediction. 
     We will make use of the existing dataset titled "Brain Tumor MRI Dataset" which is available at https://www.kaggle.com/datasets/masoudnickparvar/brain-tumor-mri-dataset/data?select=Testing. 
     The dataset is separated into training and test portions. 
