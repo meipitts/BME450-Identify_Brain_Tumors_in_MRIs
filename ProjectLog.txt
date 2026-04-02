@@ -1,0 +1,17 @@
+Attempt 1: 3/24/26
+- Tried to run the full Keggle dataset
+- resizeDim = 128 pixels
+- middle layer has 512 pixels
+- Ran for 5/15 epochs, accuracy indicated the model was not working
+- Concluded that since the images were many different orientations in each folder and the tumors were not clearly visible the model was unable to recognize tumors
+- Next steps -> search for a new dataset with better image sorting and enhancement or manually sort a section of the current dataset
+
+Attempt 2: 3/31/26
+- Sourced a new dataset from Mendeley Data called Brain Tumor MRI Dataset (Glioma, Meningioma, Pituitary, No Tumor)
+- attempting to run with the current configuration, reducing total epoch count to 5
+- New dataset is very similar
+
+Attempt 3: 4/2/26
+- Pulled just coronal views from each category, making a smaller dataset of 20 training images each and between 15 and 30 testing images in each category
+- Ran with 15 and 30 epochs
+- 30 epochs stabilized at 64.5% accuracy after 12 epochs
