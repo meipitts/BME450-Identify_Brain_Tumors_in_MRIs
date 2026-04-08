@@ -15,3 +15,7 @@ Attempt 3: 4/2/26
 - Pulled just coronal views from each category, making a smaller dataset of 20 training images each and between 15 and 30 testing images in each category
 - Ran with 15 and 30 epochs
 - 30 epochs stabilized at 64.5% accuracy after 12 epochs
+
+NeuralNetLoader: 4/8/26
+- Using the smaller dataset achieved ~60% accuracy, saved the trained model to a .pt file
+- Wrote the NeuralNetLoader script which imports the trained Neural Net and runs it against the test dataset
