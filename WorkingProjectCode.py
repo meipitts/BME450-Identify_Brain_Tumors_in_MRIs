@@ -14,17 +14,18 @@ from torchvision.transforms import ToTensor
 import matplotlib.pyplot as plt
 
 #Import and format training and test datasets
+resizeDim = 128 #The pixel number the images will be resized to
 image_transforms = transforms.Compose([
-    transforms.Resize((128, 128)),
+    transforms.Resize((resizeDim, resizeDim)),
     transforms.ToTensor(),
     #transforms.Normalize()
 ])
 
-training_data = datasets.ImageFolder(root=r'', transform=image_transforms)
-test_data = datasets.ImageFolder(root=r'', transform=image_transforms)
+training_data = datasets.ImageFolder(root=r"C:\Users\npetr\Downloads\Brain Tumor MRI Dataset (Glioma, Meningioma, Pitui\Brain Tumor MRI Dataset (Glioma, Meningioma, Pitui\Epic and CSCR hospital Dataset\Epic and CSCR hospital Dataset\Train_Abridged_1", transform=image_transforms)
+test_data = datasets.ImageFolder(root=r"C:\Users\npetr\Downloads\Brain Tumor MRI Dataset (Glioma, Meningioma, Pitui\Brain Tumor MRI Dataset (Glioma, Meningioma, Pitui\Epic and CSCR hospital Dataset\Epic and CSCR hospital Dataset\Test_Abridged_1", transform=image_transforms)
 
 #Define the categories
-categories = ['normal', 'tumorType1', 'tumorType2', 'tumorType3']
+categories = ['Glioma', 'Meningioma', 'Pituitary tumor', 'No tumor']
 
 #Display a sample from the dataset
 sample_num = 15
@@ -41,7 +42,7 @@ class Net(nn.Module):
     def __init__(self):
         super(Net, self).__init__()
         self.flatten = nn.Flatten()
-        self.l1 = nn.Linear(128*128*3, 512)
+        self.l1 = nn.Linear(resizeDim*resizeDim*3, 512)
         self.l2 = nn.Linear(512, 512)
         self.l3 = nn.Linear(512, 4)
     
@@ -93,7 +94,7 @@ loss_fn = nn.CrossEntropyLoss()
 learning_rate = 1e-3
 optimizer = optim.Adam(model.parameters(), lr=learning_rate)
 
-epochs = 15
+epochs = 30
 for t in range(epochs):
     print(f"Epoch {t+1}\n-------------------------------")
     train_loop(train_dataloader, model, loss_fn, optimizer)
@@ -110,3 +111,5 @@ with torch.no_grad():
         pred = model(X)
         print(f'--Expected Value {y}')
         print(f'--Actual Value: {pred}')
+
+torch.save(model.state_dict(), r"C:\Users\npetr\Downloads\BME450_Project_Datasets\Attempt 3\Attempt3ver2.pt")
