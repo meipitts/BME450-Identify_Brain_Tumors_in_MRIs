@@ -43,7 +43,7 @@ class Net(nn.Module):
         self.flatten = nn.Flatten()
         self.l1 = nn.Linear(128*128*3, 512)
         self.l2 = nn.Linear(512, 512)
-        self.l3 = nn.Linear(512, 3)
+        self.l3 = nn.Linear(512, 4)
     
     def forward(self, x):
         x = self.flatten(x)
