@@ -19,3 +19,8 @@ Attempt 3: 4/2/26
 NeuralNetLoader: 4/8/26
 - Using the smaller dataset achieved ~60% accuracy, saved the trained model to a .pt file
 - Wrote the NeuralNetLoader script which imports the trained Neural Net and runs it against the test dataset
+
+
+Attemp 4: 4/20/26
+- Added training loss and validation accuracy graphs in training .pt
+- Added final accuracy and classification report in NeuralNetLoader
