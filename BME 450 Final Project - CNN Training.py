@@ -93,7 +93,7 @@ criterion = nn.CrossEntropyLoss()
 optimizer = optim.SGD(net.parameters(), lr=0.02, momentum=0.9)
 
 # Determine number of epochs and training loss/validation accuracy vectors
-epochs = 10
+epochs = 15
 train_losses = []
 val_accuracies = []
 
@@ -146,14 +146,50 @@ print('Model Saved! \n')
 dataiter = iter(testloader)
 images, labels = next(dataiter)
 
-imshow(torchvision.utils.make_grid(images))
-print('GroundTruth: ', ' '.join(f'{classes[labels[j]]:5s}' for j in range(4)))
-
 net.load_state_dict(torch.load(path, weights_only=True))
 outputs = net(images)
 _, predicted = torch.max(outputs, 1)
 
-print('Predicted: ', ' '.join(f'{classes[predicted[j]]:5s}' for j in range(4)))
+# Unnormalize function
+def unnormalize(img):
+    img = img / 2 + 0.5
+    return img.numpy().transpose((1, 2, 0))
+
+# Plot images with labels
+fig, axes = plt.subplots(2, 4, figsize=(14, 7))
+
+for idx in range(4):
+    
+    # Determine border color
+    correct = (predicted[idx] == labels[idx])
+    border_color = 'green' if correct else 'red'
+
+    # ----- TOP ROW: ORIGINAL + GROUND TRUTH -----
+    ax_top = axes[0, idx]
+    ax_top.imshow(unnormalize(images[idx]))
+    ax_top.set_xticks([])
+    ax_top.set_yticks([])
+    ax_top.set_title(f"Original Class: {classes[labels[idx]]}", fontsize=11)
+
+    #  Add border
+    for spine in ax_top.spines.values():
+        spine.set_edgecolor(border_color)
+        spine.set_linewidth(3)
+
+    # ----- BOTTOM ROW: ORIGINAL + PREDICTION -----
+    ax_bottom = axes[1, idx]
+    ax_bottom.imshow(unnormalize(images[idx]))
+    ax_top.set_xticks([])
+    ax_top.set_yticks([])
+    ax_bottom.set_title(f"Predicted Class: {classes[predicted[idx]]}", fontsize=11)
+
+    # Add border
+    for spine in ax_bottom.spines.values():
+        spine.set_edgecolor(border_color)
+        spine.set_linewidth(3)
+
+plt.tight_layout()
+plt.show()
 
 #################################
 #####  ACCURACY OF TRAINING #####
@@ -173,7 +209,7 @@ with torch.no_grad():
         total += labels.size(0)
         correct += (predicted == labels).sum().item()
 
-print(f'\n Accuracy of the network on the {total} test images: {100 * correct // total} % \n')
+print(f'\nAccuracy of the network on the {total} test images: {100 * correct // total} % \n')
 
 # prepare to count predictions for each class
 correct_pred = {classname: 0 for classname in classes}
@@ -196,6 +232,8 @@ for classname, correct_count in correct_pred.items():
     accuracy = 100 * float(correct_count) / total_pred[classname]
     print(f'Accuracy for {classname:5s} is {accuracy:.1f} %')
 
+print('\n')
+
 #################################
 ######## RESULTS GRAPH ##########
 #################################
@@ -204,6 +242,7 @@ epochs_range = range(1, len(train_losses) + 1)
 
 # Plot Graph for Training Loss
 fig, ax = plt.subplots(1, 2, figsize=(10,5))
+
 ax[0].plot(epochs_range, train_losses)
 ax[0].set_xlabel("Epoch")
 ax[0].set_ylabel("Loss")
@@ -217,5 +256,6 @@ ax[1].set_ylabel("Validation Accuracy (%)")
 ax[1].set_title("Validation Accuracy vs Epoch")
 ax[1].grid(True)
 
-plt.tight_layout()
+fig.suptitle(f'Results Graphs for {len(epochs_range)} Epochs and {total} Images', fontsize=16)
+plt.tight_layout(rect=[0, 0, 1, 0.95])  # leave space for the title
 plt.show()
