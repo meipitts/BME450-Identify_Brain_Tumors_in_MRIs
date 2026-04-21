@@ -24,3 +24,8 @@ NeuralNetLoader: 4/8/26
 Attemp 4: 4/20/26
 - Added training loss and validation accuracy graphs in training .pt
 - Added final accuracy and classification report in NeuralNetLoader
+
+Attempt 5: 4/20/26
+- Created a new neural network using convolution method
+- Attempted small coronal dataset and larger Mendely Data
+- Tried various # of epochs 
