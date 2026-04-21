@@ -34,18 +34,18 @@ transform = transforms.Compose([        # Resize and normalize data
 ])
 
 # Import data for testing and training
-batch_size = 4
+batch_size = 16
 if __name__ == "__main__":          # 
-    # trainset = datasets.ImageFolder(root="C:\\Users\\pitts\\OneDrive - purdue.edu\\Documents\\09 - Semester 8\\BME 450\\00 - Final Project\\Epic and CSCR hospital Dataset\\Train", transform=transform)
+    trainset = datasets.ImageFolder(root="C:\\Users\\pitts\\OneDrive - purdue.edu\\Documents\\09 - Semester 8\\BME 450\\00 - Final Project\\Epic and CSCR hospital Dataset\\Train", transform=transform)
         # Data for entire Mendely Data
-    trainset = datasets.ImageFolder(root="C:\\Users\\pitts\\OneDrive - purdue.edu\\Documents\\09 - Semester 8\\BME 450\\00 - Final Project\\Train_Coronal", transform=transform)
+    # trainset = datasets.ImageFolder(root="C:\\Users\\pitts\\OneDrive - purdue.edu\\Documents\\09 - Semester 8\\BME 450\\00 - Final Project\\Train_Coronal", transform=transform)
         # Data for Coronal View only
     trainloader = DataLoader(trainset, batch_size=batch_size, shuffle=True, num_workers=0)
         # Loads data
 
-    # testset = datasets.ImageFolder(root="C:\\Users\\pitts\\OneDrive - purdue.edu\\Documents\\09 - Semester 8\\BME 450\\00 - Final Project\\Epic and CSCR hospital Dataset\\Test", transform=transform)
+    testset = datasets.ImageFolder(root="C:\\Users\\pitts\\OneDrive - purdue.edu\\Documents\\09 - Semester 8\\BME 450\\00 - Final Project\\Epic and CSCR hospital Dataset\\Test", transform=transform)
         # Data for entire Mendely Data
-    testset = datasets.ImageFolder(root="C:\\Users\\pitts\\OneDrive - purdue.edu\\Documents\\09 - Semester 8\\BME 450\\00 - Final Project\\Test_Coronal", transform=transform)
+    # testset = datasets.ImageFolder(root="C:\\Users\\pitts\\OneDrive - purdue.edu\\Documents\\09 - Semester 8\\BME 450\\00 - Final Project\\Test_Coronal", transform=transform)
         # Data for Coronal View only
     testloader = DataLoader(testset, batch_size=batch_size, shuffle=False, num_workers=0)
         # Loads data
@@ -85,18 +85,18 @@ class Net(nn.Module):
 # Resets network
 net = Net()
 
+#################################
+########  TRAIN DATA  ###########
+################################## 
 # Define a Loss function and optimizer
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.SGD(net.parameters(), lr=0.02, momentum=0.9)
 
 # Determine number of epochs and training loss/validation accuracy vectors
-epochs = 30
+epochs = 10
 train_losses = []
 val_accuracies = []
 
-#################################
-########  TRAIN DATA  ###########
-#################################
 for t in range(epochs):  # loop over the dataset multiple times
 
     running_loss = 0.0
