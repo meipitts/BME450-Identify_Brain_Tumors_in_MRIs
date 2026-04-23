@@ -29,3 +29,9 @@ Attempt 5: 4/20/26
 - Created a new neural network using convolution method
 - Attempted small coronal dataset and larger Mendely Data
 - Tried various # of epochs 
+
+Attempt 6: 4/22/26
+- Created a 2-Layer Neural Network Training
+- Created a ResNet18 Neural Network Training
+- Utilized all Mendeley Data
+- Outputs: Sample tests, results graph, total accuracy/class accuracies, time to run code 
